@@ -11,7 +11,35 @@ body {
 
 .game {
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.reset {
+  font-size: 22px;
+  margin-bottom: 70px;
+  background-color: #43302e;
+  color: white;
+  padding: 10px;
+  border-radius: 15px;
+  border: 4px solid transparent;
+  border-image: linear-gradient(
+    45deg,
+    #dfc505 0%,
+    #bfa204 25%,
+    #997f03 50%,
+    #bfa204 75%,
+    #dfc505 100%
+  );
+  border-image-slice: 1; /* Ensures full gradient fills the border */
+  box-shadow: 7px 7px 10px rgba(0, 0, 0, 0.747);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.reset:hover {
+  transform: scale(1.05);
 }
 
 .board {
@@ -145,4 +173,69 @@ body {
 
 .player-info a img {
   margin: 0;
+}
+
+/* Window to show winner or Draw*/
+.hidden {
+  display: none;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  width: 30vw;
+  height: 40vh;
+  background-color: #b06500;
+  background-image: linear-gradient(315deg, #b06500 0%, #5a321a 74%);
+  padding: 20px;
+  border-radius: 25px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 16px;
+  font-size: 60px;
+  font-weight: bold;
+  color: white;
+}
+
+#closeModal {
+  padding: 8px 16px;
+  font-size: 20px;
+  color: white;
+  border: 4px solid transparent;
+  border-image: linear-gradient(
+    45deg,
+    #dfc505 0%,
+    #bfa204 25%,
+    #997f03 50%,
+    #bfa204 75%,
+    #dfc505 100%
+  );
+  border-image-slice: 1; /* Ensures full gradient fills the border */
+  background-color: #43302e;
+  box-shadow: 7px 7px 10px rgba(0, 0, 0, 0.747);
+  cursor: pointer;
+}
+
+#closeModal:hover {
+  transform: scale(1.03);
 }

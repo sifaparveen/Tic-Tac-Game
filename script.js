@@ -3,6 +3,101 @@
 const cells = document.querySelectorAll(".board-cell");
 const profile1 = document.querySelector(".profile1");
 const profile2 = document.querySelector(".profile2");
+const reset = document.querySelector(".reset");
+
+const gameModal = document.getElementById("gameModal");
+const modalMessage = document.getElementById("modalMessage");
+const closeModal = document.getElementById("closeModal");
+
+const resetGame = () => {
+  cells.forEach((cell) => {
+    cell.innerHTML = " ";
+  });
+  boardState.fill(null);
+  player = "X";
+  gameModal.classList.add("hidden");
+  modalMessage.innerHTML = "";
+};
+
+const showModal = (message) => {
+  gameModal.classList.remove("hidden");
+  if (message === "X") {
+    modalMessage.innerHTML = `<svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="88"
+        height="88"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="url(#whiteShadeGradient)"
+        stroke-width="4"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <defs>
+          <!-- Gradient Definition -->
+          <linearGradient
+            id="whiteShadeGradient"
+            x1="0"
+            y1="0"
+            x2="1"
+            y2="1"
+          >
+            <stop offset="0%" stop-color="#ffffff" />
+            <stop offset="25%" stop-color="#d9d9d9" />
+            <stop offset="50%" stop-color="#bfbfbf" />
+            <stop offset="75%" stop-color="#d9d9d9" />
+            <stop offset="100%" stop-color="#ffffff" />
+          </linearGradient>
+        </defs>
+        <line x1="6" y1="6" x2="18" y2="18" stroke="url(#whiteShadeGradient)" stroke-width="4"></line>
+        <line x1="18" y1="6" x2="6" y2="18" stroke="url(#whiteShadeGradient)" stroke-width="4"></line>
+      </svg> Wins!!`;
+  } else if (message === "O") {
+    modalMessage.innerHTML = `<svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="88"
+          height="88"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="url(#goldGradient)"
+          stroke-width="4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <defs>
+            <!-- Gradient Definition -->
+            <linearGradient id="goldGradient" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#DFC505" />
+              <!-- Base gold -->
+              <stop offset="25%" stop-color="#bfa204" />
+              <!-- Darker gold -->
+              <stop offset="50%" stop-color="#997f03" />
+              <!-- Deep gold -->
+              <stop offset="75%" stop-color="#bfa204" />
+              <!-- Darker gold -->
+              <stop offset="100%" stop-color="#DFC505" />
+              <!-- Base gold -->
+            </linearGradient>
+
+            <!-- Shadow Filter -->
+            <filter id="circleShadow" x="-50%" y="-50%" width="200%" height="200%">
+              <feDropShadow dx="2" dy="2" stdDeviation="2" flood-color="rgba(0, 0, 0, 0.4)" />
+            </filter>
+          </defs>
+
+          <!-- Circle with Shadow -->
+          <circle
+            cx="12"
+            cy="12"
+            r="8"
+            stroke="url(#goldGradient)"
+            filter="url(#circleShadow)"
+          ></circle>
+        </svg> Wins!!`;
+  } else {
+    modalMessage.innerHTML = "It's Draw!!";
+  }
+};
 
 let player = "X"; // Starting with "X" (player's turn)
 const boardState = Array(9).fill(null);
@@ -83,27 +178,47 @@ cells.forEach((cell, index) => {
       player = "O"; // Switch player
     } else {
       cell.innerHTML = `<svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="88"
-        height="88"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="url(#darkRedGradient)"
-        stroke-width="4"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <defs>
-          <linearGradient id="darkRedGradient" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#892201" />
-            <stop offset="25%" stop-color="#6f1b01" />
-            <stop offset="50%" stop-color="#4e1301" />
-            <stop offset="75%" stop-color="#6f1b01" />
-            <stop offset="100%" stop-color="#892201" />
-          </linearGradient>
-        </defs>
-        <circle cx="12" cy="12" r="8" stroke="url(#darkRedGradient)" stroke-width="4"></circle>
-      </svg>`;
+          xmlns="http://www.w3.org/2000/svg"
+          width="88"
+          height="88"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="url(#goldGradient)"
+          stroke-width="4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <defs>
+            <!-- Gradient Definition -->
+            <linearGradient id="goldGradient" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#DFC505" />
+              <!-- Base gold -->
+              <stop offset="25%" stop-color="#bfa204" />
+              <!-- Darker gold -->
+              <stop offset="50%" stop-color="#997f03" />
+              <!-- Deep gold -->
+              <stop offset="75%" stop-color="#bfa204" />
+              <!-- Darker gold -->
+              <stop offset="100%" stop-color="#DFC505" />
+              <!-- Base gold -->
+            </linearGradient>
+
+            <!-- Shadow Filter -->
+            <filter id="circleShadow" x="-50%" y="-50%" width="200%" height="200%">
+              <feDropShadow dx="2" dy="2" stdDeviation="2" flood-color="rgba(0, 0, 0, 0.4)" />
+            </filter>
+          </defs>
+
+          <!-- Circle with Shadow -->
+          <circle
+            cx="12"
+            cy="12"
+            r="8"
+            stroke="url(#goldGradient)"
+            filter="url(#circleShadow)"
+          ></circle>
+        </svg>`;
+
       profile2.style.transform = "scale(1.1)";
       setTimeout(() => {
         profile2.style.transform = "scale(1)";
@@ -114,11 +229,11 @@ cells.forEach((cell, index) => {
     // After the move, check if there's a winner or a draw
     const status = checkGameStatus();
     if (status) {
-      if (status === "draw") {
-        console.log("The game is a draw.");
-      } else {
-        console.log(`${status} wins!`);
-      }
+      showModal(status);
     }
   });
 });
+
+reset.addEventListener("click", resetGame);
+
+closeModal.addEventListener("click", resetGame);
