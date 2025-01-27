@@ -9,6 +9,15 @@ const gameModal = document.getElementById("gameModal");
 const modalMessage = document.getElementById("modalMessage");
 const closeModal = document.getElementById("closeModal");
 
+const bgAudio = new Audio("sounds/gb_music.mp3");
+const tileAudio = new Audio("sounds/tile_music.mp3");
+const winAudio = new Audio("sounds/win_music.wav");
+const drawAudio = new Audio("sounds/fail.mp3");
+
+bgAudio.loop = true;
+bgAudio.play();
+bgAudio.volume = 0.4;
+
 const svgX = `<svg
         xmlns="http://www.w3.org/2000/svg"
         width="88"
@@ -95,11 +104,14 @@ const resetGame = () => {
 const showModal = (message) => {
   gameModal.classList.remove("hidden");
   if (message === "X") {
+    winAudio.play();
     modalMessage.innerHTML = `${svgX} Wins!!`;
   } else if (message === "O") {
+    winAudio.play();
     modalMessage.innerHTML = `${svgO} Wins!!`;
   } else {
     modalMessage.innerHTML = "It's Draw!!";
+    drawAudio.play();
   }
 };
 
@@ -160,6 +172,8 @@ cells.forEach((cell, index) => {
       }, 400);
       player = "X";
     }
+
+    tileAudio.play();
 
     // To check if there's a winner or a draw
     const status = checkGameStatus();
