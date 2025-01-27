@@ -1,0 +1,148 @@
+body {
+  margin: 0;
+  height: 100vh;
+  background-image: url("images/background10.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+}
+
+.game {
+  display: flex;
+  align-items: flex-end;
+}
+
+.board {
+  height: 500px;
+  width: 500px;
+  background-image: url("images/wooden_board2.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.747);
+  margin-bottom: 50px;
+}
+
+.grid-container {
+  position: relative;
+  top: 23px;
+  left: 23px;
+  height: 455px;
+  width: 455px;
+  display: grid;
+  grid-template-areas:
+    "a b c"
+    "d e f"
+    "g h i";
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.board-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.symbol1 {
+  grid-area: a;
+}
+
+.symbol2 {
+  grid-area: b;
+}
+
+.symbol3 {
+  grid-area: c;
+}
+
+.symbol4 {
+  grid-area: d;
+}
+
+.symbol5 {
+  grid-area: e;
+}
+
+.symbol6 {
+  grid-area: f;
+}
+
+.symbol7 {
+  grid-area: g;
+}
+
+.symbol8 {
+  grid-area: h;
+}
+
+.symbol9 {
+  grid-area: i;
+}
+
+.profile1 {
+  background-image: url("images/profile2.png");
+  left: 100px;
+}
+
+.profile2 {
+  background-image: url("images/profile1.png");
+  right: 100px;
+}
+
+.profile {
+  height: 450px;
+  width: 450px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.5));
+  position: absolute;
+  top: -80px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* .profile:hover {
+  transform: scale(1.1);
+} */
+
+.profile-content img {
+  z-index: 1;
+  filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.5));
+}
+
+.profile-content {
+  margin-bottom: 85px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #43302e;
+  border-radius: 25px;
+  padding: 20px 10px;
+}
+
+.player-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.player-info a {
+  margin: 5px 0px;
+  background-color: #b06400a7;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+/* .player-info2 {
+  padding-left: 10px;
+  margin-left: 10px;
+} */
+
+.player-info a img {
+  margin: 0;
+}
