@@ -9,6 +9,18 @@ const gameModal = document.getElementById("gameModal");
 const modalMessage = document.getElementById("modalMessage");
 const closeModal = document.getElementById("closeModal");
 
+const cell = [
+  document.querySelector(".symbol0"),
+  document.querySelector(".symbol1"),
+  document.querySelector(".symbol2"),
+  document.querySelector(".symbol3"),
+  document.querySelector(".symbol4"),
+  document.querySelector(".symbol5"),
+  document.querySelector(".symbol6"),
+  document.querySelector(".symbol7"),
+  document.querySelector(".symbol8"),
+];
+
 const bgAudio = new Audio("sounds/gb_music.mp3");
 const tileAudio = new Audio("sounds/tile_music.mp3");
 const winAudio = new Audio("sounds/win_music.wav");
@@ -94,6 +106,10 @@ const svgO = `<svg
 const resetGame = () => {
   cells.forEach((cell) => {
     cell.innerHTML = " ";
+    cell.style.boxShadow = "none";
+    cell.style.border = "none";
+    cell.style.backgroundColor = "transparent";
+    cell.style.backgroundImage = "none";
   });
   boardState.fill(null);
   player = "X";
@@ -102,21 +118,33 @@ const resetGame = () => {
 };
 
 const showModal = (message) => {
-  gameModal.classList.remove("hidden");
-  if (message === "X") {
-    winAudio.play();
-    modalMessage.innerHTML = `${svgX} Wins!!`;
-  } else if (message === "O") {
-    winAudio.play();
-    modalMessage.innerHTML = `${svgO} Wins!!`;
-  } else {
-    modalMessage.innerHTML = "It's Draw!!";
-    drawAudio.play();
-  }
+  setTimeout(() => {
+    gameModal.classList.remove("hidden");
+    if (message === "X") {
+      winAudio.play();
+      modalMessage.innerHTML = `${svgX} Wins!!`;
+    } else if (message === "O") {
+      winAudio.play();
+      modalMessage.innerHTML = `${svgO} Wins!!`;
+    } else {
+      modalMessage.innerHTML = "It's Draw!!";
+      drawAudio.play();
+    }
+  }, 600);
 };
 
 let player = "X";
 const boardState = Array(9).fill(null);
+
+function winnerHighlight(a, b, c) {
+  [cells[a], cells[b], cells[c]].forEach((cell) => {
+    cell.style.boxShadow = "0 0 5px 5px gold";
+    cell.style.border = "2px solid rgba(255, 217, 0, 0.83)";
+    cell.style.backgroundColor = "rgba(176, 100, 0, 0.3)";
+    cell.style.backgroundImage =
+      "linear-gradient(315deg,rgba(176, 100, 0, 0.3) 0%,rgba(90, 51, 26, 0.3) 74%)";
+  });
+}
 
 function checkGameStatus() {
   const winningCombinations = [
@@ -137,6 +165,7 @@ function checkGameStatus() {
       boardState[a] === boardState[b] &&
       boardState[a] === boardState[c]
     ) {
+      winnerHighlight(a, b, c);
       console.log("Winner is: " + boardState[a]);
       return boardState[a];
     }
@@ -161,14 +190,17 @@ cells.forEach((cell, index) => {
       profile1.style.transform = "scale(1.1)";
       setTimeout(() => {
         profile1.style.transform = "scale(1)";
+        profile1.style.transform = "rotate(-10deg)";
       }, 400);
       player = "O";
     } else {
       cell.innerHTML = svgO;
 
       profile2.style.transform = "scale(1.1)";
+
       setTimeout(() => {
         profile2.style.transform = "scale(1)";
+        profile2.style.transform = "rotate(10deg)";
       }, 400);
       player = "X";
     }

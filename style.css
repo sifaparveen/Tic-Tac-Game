@@ -74,50 +74,52 @@ body {
   align-items: center;
 }
 
-.symbol1 {
+.symbol0 {
   grid-area: a;
 }
 
-.symbol2 {
+.symbol1 {
   grid-area: b;
 }
 
-.symbol3 {
+.symbol2 {
   grid-area: c;
 }
 
-.symbol4 {
+.symbol3 {
   grid-area: d;
 }
 
-.symbol5 {
+.symbol4 {
   grid-area: e;
 }
 
-.symbol6 {
+.symbol5 {
   grid-area: f;
 }
 
-.symbol7 {
+.symbol6 {
   grid-area: g;
 }
 
-.symbol8 {
+.symbol7 {
   grid-area: h;
 }
 
-.symbol9 {
+.symbol8 {
   grid-area: i;
 }
 
 .profile1 {
-  background-image: url("images/profile2.png");
-  left: 100px;
+  background-image: url("images/profile11.png");
+  left: 40px;
+  transform: rotate(-10deg);
 }
 
 .profile2 {
-  background-image: url("images/profile1.png");
-  right: 100px;
+  background-image: url("images/profile12.png");
+  right: 40px;
+  transform: rotate(10deg);
 }
 
 .profile {
@@ -127,10 +129,10 @@ body {
   background-repeat: no-repeat;
   filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.5));
   position: absolute;
-  top: -80px;
+  top: 200px;
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  align-items: flex-start;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -140,7 +142,7 @@ body {
 }
 
 .profile-content {
-  margin-bottom: 85px;
+  margin-top: 85px;
   display: flex;
   justify-content: center;
   align-items: center;
