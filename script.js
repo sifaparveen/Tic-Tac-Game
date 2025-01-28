@@ -4,10 +4,12 @@ const cells = document.querySelectorAll(".board-cell");
 const profile1 = document.querySelector(".profile1");
 const profile2 = document.querySelector(".profile2");
 const reset = document.querySelector(".reset");
+const sound = document.querySelector(".sound");
 
 const gameModal = document.getElementById("gameModal");
 const modalMessage = document.getElementById("modalMessage");
 const closeModal = document.getElementById("closeModal");
+const soundSvg = document.querySelector(".feather");
 
 const cell = [
   document.querySelector(".symbol0"),
@@ -27,8 +29,33 @@ const winAudio = new Audio("sounds/win_music.wav");
 const drawAudio = new Audio("sounds/fail.mp3");
 
 bgAudio.loop = true;
-bgAudio.play();
 bgAudio.volume = 0.4;
+
+let isPlaying = false;
+
+sound.addEventListener("click", () => {
+  if (isPlaying) {
+    bgAudio.pause();
+    console.log("Background music paused");
+    soundSvg.innerHTML = `<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+        <line x1="23" y1="9" x2="17" y2="15"></line>
+        <line x1="17" y1="9" x2="23" y2="15"></line>`;
+  } else {
+    bgAudio
+      .play()
+      .then(() => {
+        console.log("Background music playing");
+      })
+      .catch((error) => {
+        console.error("Error playing audio:", error);
+      });
+    soundSvg.innerHTML = `<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+        <path
+          d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"
+        ></path>`;
+  }
+  isPlaying = !isPlaying;
+});
 
 const svgX = `<svg
         xmlns="http://www.w3.org/2000/svg"
